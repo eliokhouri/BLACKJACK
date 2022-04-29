@@ -42,22 +42,13 @@ public class Blackjack {
             blackjackDeck.shuffle();
             System.out.println();
             System.out.println();
-            System.out.println("Shuffling cards.");
-            for (int i=0; i<3; i++){
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.println();
-            }
-            System.out.println();
+            System.out.print("Shuffling cards.");
+            Print.fourDots();
             System.out.println("Deck is shuffled. Time to begin the game!");
             TimeUnit.SECONDS.sleep(3);
 
-            //playerHand.add(blackjackDeck.remove());
-            playerHand.add(new Card("Spades", "Ace"));
+            playerHand.add(blackjackDeck.remove());
+            //playerHand.add(new Card("Spades", "Ace"));
             
             System.out.println();
             System.out.printf("The dealer dealt you a | %s | for your first card.", playerHand.getDeck().get(0).toString());
@@ -70,7 +61,7 @@ public class Blackjack {
                 System.out.print(" | ");
             }
 
-            Print.twoDots();
+            Print.fourDots();
             
             dealerHand.add(blackjackDeck.remove());
             System.out.println();
@@ -84,10 +75,10 @@ public class Blackjack {
                 System.out.print(" | ");
             }
 
-            Print.twoDots();
+            Print.fourDots();
 
-            //playerHand.add(blackjackDeck.remove());
-            playerHand.add(new Card("Hearts", "Ace"));
+            playerHand.add(blackjackDeck.remove());
+            //playerHand.add(new Card("Hearts", "Ace"));
 
             System.out.println();
             System.out.printf("The dealer dealt you a | %s | for your second card.", playerHand.getDeck().get(1).toString());
@@ -100,7 +91,7 @@ public class Blackjack {
                 System.out.print(" | ");
             }
 
-            Print.twoDots();
+            Print.fourDots();
 
             dealerHand.add(blackjackDeck.remove());
             System.out.println();
@@ -120,7 +111,7 @@ public class Blackjack {
                 }
             }
 
-            Print.twoDots();
+            Print.fourDots();
 
             System.out.println();
             System.out.println("Player's current hand: ");
@@ -158,17 +149,8 @@ public class Blackjack {
                 }
             }
             //System.out.println("" + dealerHand.getDeck().get(0).toString() + " -HIDDEN-");
-            System.out.println();
-            System.out.println();
-            for (int i=0; i<2; i++){
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                System.out.println();
-            }
+
+            Print.fourDots();
 
             int winnings = 0;
             
@@ -223,7 +205,7 @@ public class Blackjack {
 
                 else {
                     Print.smartPlayer();
-                    Print.twoDots();
+                    Print.fourDots();
                     
                     
                     System.out.println();
@@ -239,7 +221,6 @@ public class Blackjack {
             }
 
             else if (playerHandValue > 21){
-                System.out.println();
                 System.out.println();
                 System.out.println("\u2639 ROOKIE! \u2639");
                 TimeUnit.SECONDS.sleep(3);
@@ -257,6 +238,7 @@ public class Blackjack {
                 TimeUnit.SECONDS.sleep(3);
                 System.out.println();
                 System.out.println();
+
                 System.out.println("Would you like to start another round?");
                 TimeUnit.SECONDS.sleep(3);
                 System.out.println();
@@ -290,7 +272,7 @@ public class Blackjack {
 
                 else { 
                     Print.smartPlayer();
-                    Print.twoDots();
+                    Print.fourDots();
                     
                     System.out.println();
                     System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
@@ -304,39 +286,54 @@ public class Blackjack {
                 }
             }
 
-            /*else {
+            else {
 
-            }*/
+
+
+                
+
+                //while stay is false
+                // dealer asks if you want another card
+                // hit for another card
+                    // if you go over 21 you bust and lose your bet
+                // stay for no more cards
+                    // go on
+
+                //dealer flips second card
+                // if value is less than 17
+                // while dealervalue is less than 17
+                // hit for another card
+                // Stop when value is 17 or more
+                    // if value is 17 to 21 
+                        // players with smaller hand lose their bet
+                        // players with larger hand win 2x their bet
+                    // if the value is more than 21
+                        // dealer busts everyone gets 2x bet
+                
+                // if value is 17 or more
+                //if dealer doesnt bust not 22
+                    // players with smaller hand lose their bet
+                    // players with larger hand win 2x their bet
+                // if the dealer busts 22
+                    // dealer busts everyone gets 2x bet
+
+                    
+
+            }
         
 
         }
 
         if (pot > 200){
-            System.out.println();
-            System.out.println("It looks like you beat the house! We are going to have to end the night early for you.");
-            System.out.println();
-            TimeUnit.SECONDS.sleep(5);
+            Print.potOneWin();
             System.out.printf("You are ending the game with %d dollars in your pot!", pot);
-            TimeUnit.SECONDS.sleep(3);
-            System.out.println();
-            System.out.println();
-            System.out.println("GAME OVER.");
-            System.out.println();
-
+            Print.potTwo();
         }
 
         else if (pot == 0){
-            System.out.println();
-            System.out.println("It looks like you squandered your bankroll! You do not have any more money to gamble with.");
-            System.out.println();
-            TimeUnit.SECONDS.sleep(5);
+            Print.potOneLose();
             System.out.printf("You are ending the game with %d dollars in your pot!", pot);
-            TimeUnit.SECONDS.sleep(3);
-            System.out.println();
-            System.out.println();
-            System.out.println("GAME OVER.");
-            System.out.println();
-
+            Print.potTwo();
         }
 
         else {

@@ -120,7 +120,7 @@ public class Card {
 
             while (!input.equals("1") && !input.equals("11")){
                 System.out.println();
-                System.out.printf("Please enter 1 or 11 to set the value of your Ace of %s. ", this.getSuit());
+                System.out.printf("Please enter 1 or 11 to set the value of the Ace of %s. ", this.getSuit());
                 input = keyboard.nextLine();
             }
 
