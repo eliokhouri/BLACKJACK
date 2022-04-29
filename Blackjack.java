@@ -64,22 +64,13 @@ public class Blackjack {
             System.out.println();
             System.out.println();
             System.out.print("| ");
+            
             for (int i=0; i<playerHand.getDeck().size(); i++){
                 System.out.print(playerHand.getDeck().get(i).toString());
                 System.out.print(" | ");
             }
-            System.out.println();
-            System.out.println();
-            for (int i=0; i<2; i++){
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                System.out.println();
-            }
-            System.out.println();
+
+            Print.twoDots();
             
             dealerHand.add(blackjackDeck.remove());
             System.out.println();
@@ -87,22 +78,13 @@ public class Blackjack {
             System.out.println();
             System.out.println();
             System.out.print("| ");
+            
             for (int i=0; i<dealerHand.getDeck().size(); i++){
                 System.out.print(dealerHand.getDeck().get(i).toString());
                 System.out.print(" | ");
             }
-            System.out.println();
-            System.out.println();
-            for (int i=0; i<2; i++){
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                System.out.println();
-            }
-            System.out.println();
+
+            Print.twoDots();
 
             //playerHand.add(blackjackDeck.remove());
             playerHand.add(new Card("Hearts", "Ace"));
@@ -112,22 +94,13 @@ public class Blackjack {
             System.out.println();
             System.out.println();
             System.out.print("| ");
+
             for (int i=0; i<playerHand.getDeck().size(); i++){
                 System.out.print(playerHand.getDeck().get(i).toString());
                 System.out.print(" | ");
             }
-            System.out.println();
-            System.out.println();
-            for (int i=0; i<2; i++){
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                System.out.println();
-            }
-            System.out.println();
+
+            Print.twoDots();
 
             dealerHand.add(blackjackDeck.remove());
             System.out.println();
@@ -135,6 +108,7 @@ public class Blackjack {
             System.out.println();
             System.out.println();
             System.out.print("| ");
+
             for (int i=0; i<dealerHand.getDeck().size(); i++){
                 if (i == 1){
                     System.out.print("-HIDDEN-");
@@ -145,27 +119,19 @@ public class Blackjack {
                     System.out.print(" | ");
                 }
             }
-            System.out.println();
-            System.out.println();
-            for (int i=0; i<2; i++){
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                TimeUnit.SECONDS.sleep(1);
-                System.out.print(".");
-                System.out.println();
-            }
-            System.out.println();
+
+            Print.twoDots();
 
             System.out.println();
             System.out.println("Player's current hand: ");
             System.out.println();
             System.out.print("| ");
+
             for (int i=0; i<playerHand.getDeck().size(); i++){
                 System.out.print(playerHand.getDeck().get(i).toString());
                 System.out.print(" | ");
             }
+
             //System.out.println("" + playerHand.getDeck().get(0).toString() + " " + playerHand.getDeck().get(1).toString()); 
             TimeUnit.SECONDS.sleep(3);
             System.out.println();
@@ -194,7 +160,15 @@ public class Blackjack {
             //System.out.println("" + dealerHand.getDeck().get(0).toString() + " -HIDDEN-");
             System.out.println();
             System.out.println();
-            TimeUnit.SECONDS.sleep(3);
+            for (int i=0; i<2; i++){
+                TimeUnit.SECONDS.sleep(1);
+                System.out.print(".");
+                TimeUnit.SECONDS.sleep(1);
+                System.out.print(".");
+                TimeUnit.SECONDS.sleep(1);
+                System.out.print(".");
+                System.out.println();
+            }
 
             int winnings = 0;
             
@@ -217,6 +191,7 @@ public class Blackjack {
                 System.out.println();
                 System.out.println();
                 System.out.println("Would you like to start another round?");
+                TimeUnit.SECONDS.sleep(3);
                 System.out.println();
                 String continueString = "";
 
@@ -247,26 +222,10 @@ public class Blackjack {
                 }
 
                 else {
-                    System.out.println();
-                    TimeUnit.SECONDS.sleep(3);
-                    System.out.println("Smart player...");
-                    TimeUnit.SECONDS.sleep(3);
-                    System.out.println();
-                    System.out.print("Looks like you are calling it early.");
-                    System.out.println();
-                    System.out.println();
-
-                    for (int i=0; i<2; i++){
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        System.out.println();
-                    }
-
-                    System.out.println();
+                    Print.smartPlayer();
+                    Print.twoDots();
+                    
+                    
                     System.out.println();
                     System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
                     TimeUnit.SECONDS.sleep(3);
@@ -274,15 +233,12 @@ public class Blackjack {
                     System.out.println();
                     System.out.println("GAME OVER.");
                     System.out.println();
+                    TimeUnit.SECONDS.sleep(3);
                     System.exit(0);
                 }
             }
 
             else if (playerHandValue > 21){
-                for (int i=0; i<3; i++){
-                    TimeUnit.SECONDS.sleep(2);
-                    System.out.print(".");
-                }
                 System.out.println();
                 System.out.println();
                 System.out.println("\u2639 ROOKIE! \u2639");
@@ -302,6 +258,7 @@ public class Blackjack {
                 System.out.println();
                 System.out.println();
                 System.out.println("Would you like to start another round?");
+                TimeUnit.SECONDS.sleep(3);
                 System.out.println();
                 String continueString = "";
 
@@ -332,26 +289,9 @@ public class Blackjack {
                 }
 
                 else { 
-                    System.out.println();
-                    TimeUnit.SECONDS.sleep(3);
-                    System.out.println("Smart player...");
-                    TimeUnit.SECONDS.sleep(3);
-                    System.out.println();
-                    System.out.print("Looks like you are calling it early.");
-                    System.out.println();
-                    System.out.println();
-
-                    for (int i=0; i<2; i++){
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        System.out.println();
-                    }
-
-                    System.out.println();
+                    Print.smartPlayer();
+                    Print.twoDots();
+                    
                     System.out.println();
                     System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
                     TimeUnit.SECONDS.sleep(3);
@@ -359,6 +299,7 @@ public class Blackjack {
                     System.out.println();
                     System.out.println("GAME OVER.");
                     System.out.println();
+                    TimeUnit.SECONDS.sleep(3);
                     System.exit(0);
                 }
             }
