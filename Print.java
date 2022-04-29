@@ -46,11 +46,6 @@ public class Print {
         System.out.println();
         TimeUnit.SECONDS.sleep(5);
     }
-
-
-
-
-
 }
 
 

@@ -132,7 +132,5 @@ public class Card {
             int result = Integer.parseInt(this.getName());
             return result;
         }
-    }
-
-       
+    }       
 }
