@@ -129,6 +129,7 @@ public class Blackjack {
             System.out.println();
 
             int playerHandValue = 0;
+            int dealerHandValue = 0;
 
 
             for (Card c : playerHand.getDeck()){
@@ -188,19 +189,8 @@ public class Blackjack {
                 if (continueString.equals("Yes")){
                     System.out.println();
                     System.out.println("New round starting shortly...");
-                    System.out.println();
-                    
-                    for (int i=0; i<2; i++){
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        TimeUnit.SECONDS.sleep(1);
-                        System.out.print(".");
-                        System.out.println();
-                    }
+                    Print.fourDots();
 
-                    System.out.println();
                     continue;
                 }
 
@@ -338,7 +328,17 @@ public class Blackjack {
                         playerHand.add(blackjackDeck.remove());
                         System.out.println();
                         System.out.printf("The dealer dealt you a | %s | for your next card.", playerHand.getDeck().get(cardCounter).toString());
-                        TimeUnit.SECONDS.sleep(3);
+                        
+                        System.out.println();
+                        System.out.println();
+                        System.out.print("| ");
+
+                        for (int i=0; i<playerHand.getDeck().size(); i++){
+                            System.out.print(playerHand.getDeck().get(i).toString());
+                            System.out.print(" | ");
+                        }
+                    
+                        Print.fourDots();
 
                         System.out.println();
                         System.out.println();
@@ -409,19 +409,254 @@ public class Blackjack {
                     }
                 }
 
+                System.out.println("The dealer's hidden card is... ");
+                Print.fourDots();
+
+                    
+                System.out.println("Dealer's current hand: ");
+                System.out.println();
+                System.out.print("| ");
+                for (int i=0; i<dealerHand.getDeck().size(); i++){
+                    System.out.print(dealerHand.getDeck().get(i).toString());
+                    System.out.print(" | ");
+                }
+                System.out.println();
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println();
+
+                for (Card c : dealerHand.getDeck()){
+                    dealerHandValue += c.getValue();
+                }
+
+                if (dealerHandValue < 17){
+                    int dealerCardCounter = 1;
+
+                    while (dealerHandValue < 17) {
+                        dealerCardCounter ++;
+                        dealerHand.add(blackjackDeck.remove());
+                        System.out.println();
+                        System.out.printf("The dealer dealt themselves a | %s | for their next card.", dealerHand.getDeck().get(dealerCardCounter).toString());
+                        System.out.println();
+                        System.out.println();
+                        System.out.print("| ");
+
+                        for (int i=0; i<dealerHand.getDeck().size(); i++){
+                            System.out.print(dealerHand.getDeck().get(i).toString());
+                            System.out.print(" | ");
+                        }
+                        Print.fourDots();
+
+                        dealerHandValue += dealerHand.getDeck().get(dealerCardCounter).getValue();
+                        continue;
+                    }
+
+                    if (dealerHandValue > 17 && dealerHandValue <= 21){
+
+                        if (playerHandValue > dealerHandValue){
+
+                            System.out.println("The value of your hand is greater than the dealers!");
+                            Print.fourDots();
+                            System.out.println("That means you beat the dealer! ");
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+
+                            System.out.println("You win 2 times your original bet!");
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            winnings += bet * 2;
+                            pot += winnings;
+                            System.out.printf("Your original bet was %d dollars, and you won %d dollars!", bet, winnings);
+                            TimeUnit.SECONDS.sleep(5);
+                            System.out.println();
+                            System.out.println();
+                            System.out.printf("You now have a total of %d dollars in your pot!", pot);
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            System.out.println();
+                            System.out.println("Would you like to start another round?");
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            String continueString = "";
+
+                            while (!continueString.equals("Yes") && !continueString.equals("No")){
+                                System.out.println();
+                                System.out.println("Please enter \"Yes\" or \"No\". ");
+                                System.out.println();
+                                continueString = keyboard.nextLine();
+                            }
+                        
+                            if (continueString.equals("Yes")){
+                                System.out.println();
+                                System.out.println("New round starting shortly...");
+                                Print.fourDots();
+                            
+                                continue game;
+                            }
+                        
+                            else {
+                                Print.smartPlayer();
+                                Print.fourDots();
+
+
+                                System.out.println();
+                                System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
+                                TimeUnit.SECONDS.sleep(3);
+                                System.out.println();
+                                System.out.println();
+                                System.out.println("GAME OVER.");
+                                System.out.println();
+                                TimeUnit.SECONDS.sleep(3);
+                                System.exit(0);
+                            }
+                        }
+
+                        else {
+
+                            System.out.println();
+                            System.out.println("The value of your hand is not greater than the dealers!");
+                            System.out.println();
+                            winnings = 0;
+                            pot += winnings;
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.printf("Your original bet was %d dollars, and you won %d dollars!", bet, winnings);
+                            TimeUnit.SECONDS.sleep(5);
+                            System.out.println();
+                            System.out.println();
+                            System.out.printf("You now have a total of %d dollars in your pot!", pot);
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            System.out.println();
+
+                            System.out.println("Would you like to start another round?");
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            String continueString = "";
+
+                            while (!continueString.equals("Yes") && !continueString.equals("No")) {
+                                System.out.println();
+                                System.out.println("Please enter \"Yes\" or \"No\". ");
+                                System.out.println();
+                                continueString = keyboard.nextLine();
+                            }
+
+                            if (continueString.equals("Yes")){
+                                System.out.println();
+                                System.out.println("New round starting shortly...");
+                                Print.fourDots();
+                                continue game;
+                            }
+                            
+                            else { 
+                                Print.smartPlayer();
+                                Print.fourDots();
+                                
+                                System.out.println();
+                                System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
+                                TimeUnit.SECONDS.sleep(3);
+                                System.out.println();
+                                System.out.println();
+                                System.out.println("GAME OVER.");
+                                System.out.println();
+                                TimeUnit.SECONDS.sleep(3);
+                                System.exit(0);
+                            }
+                        }
+                    }
+
+                    else {
+                        System.out.println("Bust! The dealer's card total is over 21!");
+                        Print.fourDots();
+                        System.out.println("That means you beat the dealer! ");
+                        TimeUnit.SECONDS.sleep(3);
+                        System.out.println();
+
+                        System.out.println("You win 2 times your original bet!");
+                        TimeUnit.SECONDS.sleep(3);
+                        System.out.println();
+                        winnings += bet * 2;
+                        pot += winnings;
+                        System.out.printf("Your original bet was %d dollars, and you won %d dollars!", bet, winnings);
+                        TimeUnit.SECONDS.sleep(5);
+                        System.out.println();
+                        System.out.println();
+                        System.out.printf("You now have a total of %d dollars in your pot!", pot);
+                        TimeUnit.SECONDS.sleep(3);
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("Would you like to start another round?");
+                        TimeUnit.SECONDS.sleep(3);
+                        System.out.println();
+                        String continueString = "";
+
+                        while (!continueString.equals("Yes") && !continueString.equals("No")){
+                            System.out.println();
+                            System.out.println("Please enter \"Yes\" or \"No\". ");
+                            System.out.println();
+                            continueString = keyboard.nextLine();
+                        }
+                    
+                        if (continueString.equals("Yes")){
+                            System.out.println();
+                            System.out.println("New round starting shortly...");
+                            Print.fourDots();
+                        
+                            continue game;
+                        }
+                    
+                        else {
+                            Print.smartPlayer();
+                            Print.fourDots();
+
+
+                            System.out.println();
+                            System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            System.out.println();
+                            System.out.println("GAME OVER.");
+                            System.out.println();
+                            TimeUnit.SECONDS.sleep(3);
+                            System.exit(0);
+                        }
+                    }
+                }
 
 
 
 
+
+
+
+                else {
+                    System.out.println("The value of the first 2 cards is 17 or more");
+
+                }
+
+
+                // if value is less than 17
+                // while dealervalue is less than 17
+                // hit for another card
+                
+                // Stop when value is 17 or more
+
+                    // if value is 17 to 21 
+                        // players with smaller hand lose their bet
+                        // players with larger hand win 2x their bet
+                    // if the value is more than 21
+                        // dealer busts everyone gets 2x bet
 
 
                 
+                // if value is 17 or more
+                //if dealer doesnt bust not 22
+                    // players with smaller hand lose their bet
+                    // players with larger hand win 2x their bet
+                // if the dealer busts 22
+                    // dealer busts everyone gets 2x bet
 
                     
 
             }
-        
-
         }
 
         if (pot > 200){
@@ -453,6 +688,7 @@ public class Blackjack {
                     // go on
 
                 //dealer flips second card
+
                 // if value is less than 17
                 // while dealervalue is less than 17
                 // hit for another card
