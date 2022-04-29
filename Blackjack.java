@@ -412,6 +412,7 @@ public class Blackjack {
                 for (Card c : dealerHand.getDeck()){
                     dealerHandValue += c.getValue();
                 }
+                System.out.println();
 
                 if (dealerHandValue < 17){
                     int dealerCardCounter = 1;
