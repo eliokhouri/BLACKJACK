@@ -9,6 +9,7 @@ public class Blackjack {
         int pot = 100;
         Scanner keyboard = new Scanner(System.in);
 
+        game:
         while (pot > 0 && pot < 200){
             Deck blackjackDeck = new Deck();
             Hand playerHand = new Hand();
@@ -288,34 +289,133 @@ public class Blackjack {
 
             else {
 
+                Boolean stay = false;
+                int cardCounter = 1;
+
+                while (stay == false) {
+                    cardCounter ++;
+
+                    System.out.println();
+                    System.out.println("Player's current hand: ");
+                    System.out.println();
+                    System.out.print("| ");
+                    for (int i=0; i<playerHand.getDeck().size(); i++){
+                        System.out.print(playerHand.getDeck().get(i).toString());
+                        System.out.print(" | ");
+                    }
+
+                    System.out.println();
+                    TimeUnit.SECONDS.sleep(3);
+
+                    System.out.println();
+                    System.out.println("Dealer's current hand: ");
+                    System.out.println();
+                    System.out.print("| ");
+                    for (int i=0; i<dealerHand.getDeck().size(); i++){
+                        if (i == 1){
+                            System.out.print("-HIDDEN-");
+                            System.out.print(" | ");
+                        }
+                        else { 
+                            System.out.print(dealerHand.getDeck().get(i).toString());
+                            System.out.print(" | ");
+                        }
+                    }
+
+                    TimeUnit.SECONDS.sleep(3);
+                    System.out.println();
+                    String stayOrHit = "";
+
+                    while (!stayOrHit.equals("Hit") && !stayOrHit.equals("Stay")) {
+                        System.out.println();
+                        System.out.println("Please enter \"Hit\" for another card, or \"Stay\" for no more cards. ");
+                        System.out.println();
+                        stayOrHit = keyboard.nextLine();
+                    }
+
+                    if (stayOrHit.equals("Hit")){
+
+                        playerHand.add(blackjackDeck.remove());
+                        System.out.println();
+                        System.out.printf("The dealer dealt you a | %s | for your next card.", playerHand.getDeck().get(cardCounter).toString());
+                        TimeUnit.SECONDS.sleep(3);
+
+                        System.out.println();
+                        System.out.println();
+                        playerHandValue += playerHand.getDeck().get(cardCounter).getValue();
+
+                        if (playerHandValue > 21){
+                            System.out.println();
+                            System.out.println("Bust! Your card total is over 21!");
+                            System.out.println();
+                            winnings = 0;
+                            pot += winnings;
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.printf("Your original bet was %d dollars, and you won %d dollars!", bet, winnings);
+                            TimeUnit.SECONDS.sleep(5);
+                            System.out.println();
+                            System.out.println();
+                            System.out.printf("You now have a total of %d dollars in your pot!", pot);
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            System.out.println();
+
+                            System.out.println("Would you like to start another round?");
+                            TimeUnit.SECONDS.sleep(3);
+                            System.out.println();
+                            String continueString = "";
+
+                            while (!continueString.equals("Yes") && !continueString.equals("No")) {
+                                System.out.println();
+                                System.out.println("Please enter \"Yes\" or \"No\". ");
+                                System.out.println();
+                                continueString = keyboard.nextLine();
+                            }
+
+                            if (continueString.equals("Yes")){
+                                System.out.println();
+                                System.out.println("New round starting shortly...");
+                                Print.fourDots();
+                                continue game;
+                            }
+                            
+                            else { 
+                                Print.smartPlayer();
+                                Print.fourDots();
+                                
+                                System.out.println();
+                                System.out.printf("It looks like you are ending the game with %d dollars in your pot!", pot);
+                                TimeUnit.SECONDS.sleep(3);
+                                System.out.println();
+                                System.out.println();
+                                System.out.println("GAME OVER.");
+                                System.out.println();
+                                TimeUnit.SECONDS.sleep(3);
+                                System.exit(0);
+                            }
+                        }
+
+                        else {
+                            continue;
+                        }
+                    }
+
+                    else {
+                        System.out.println();
+                        System.out.println("You chose to stay, dealer will now flip their second card.");
+                        Print.fourDots();
+                        stay = true;
+                        continue;
+                    }
+                }
+
+
+
+
+
 
 
                 
-
-                //while stay is false
-                // dealer asks if you want another card
-                // hit for another card
-                    // if you go over 21 you bust and lose your bet
-                // stay for no more cards
-                    // go on
-
-                //dealer flips second card
-                // if value is less than 17
-                // while dealervalue is less than 17
-                // hit for another card
-                // Stop when value is 17 or more
-                    // if value is 17 to 21 
-                        // players with smaller hand lose their bet
-                        // players with larger hand win 2x their bet
-                    // if the value is more than 21
-                        // dealer busts everyone gets 2x bet
-                
-                // if value is 17 or more
-                //if dealer doesnt bust not 22
-                    // players with smaller hand lose their bet
-                    // players with larger hand win 2x their bet
-                // if the dealer busts 22
-                    // dealer busts everyone gets 2x bet
 
                     
 
@@ -343,3 +443,29 @@ public class Blackjack {
     }
     
 }
+
+
+                //while stay is false
+                // dealer asks if you want another card
+                // hit for another card
+                    // if you go over 21 you bust and lose your bet
+                // stay for no more cards
+                    // go on
+
+                //dealer flips second card
+                // if value is less than 17
+                // while dealervalue is less than 17
+                // hit for another card
+                // Stop when value is 17 or more
+                    // if value is 17 to 21 
+                        // players with smaller hand lose their bet
+                        // players with larger hand win 2x their bet
+                    // if the value is more than 21
+                        // dealer busts everyone gets 2x bet
+                
+                // if value is 17 or more
+                //if dealer doesnt bust not 22
+                    // players with smaller hand lose their bet
+                    // players with larger hand win 2x their bet
+                // if the dealer busts 22
+                    // dealer busts everyone gets 2x bet
