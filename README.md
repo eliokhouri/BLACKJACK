@@ -1,3 +1,3 @@
-# BLACKJACK2
+# BLACKJACK
  
  Java newbie
