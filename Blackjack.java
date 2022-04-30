@@ -47,9 +47,7 @@ public class Blackjack {
             System.out.println("Deck is shuffled. Time to begin the game!");
             TimeUnit.SECONDS.sleep(3);
 
-            playerHand.add(blackjackDeck.remove());
-            //playerHand.add(new Card("Spades", "Ace"));
-            
+            playerHand.add(blackjackDeck.remove());        
             System.out.println();
             System.out.printf("The dealer dealt you a | %s | for your first card.", playerHand.getDeck().get(0).toString());
             System.out.println();
@@ -78,8 +76,6 @@ public class Blackjack {
             Print.fourDots();
 
             playerHand.add(blackjackDeck.remove());
-            //playerHand.add(new Card("Hearts", "Ace"));
-
             System.out.println();
             System.out.printf("The dealer dealt you a | %s | for your second card.", playerHand.getDeck().get(1).toString());
             System.out.println();
